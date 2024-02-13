@@ -12,3 +12,6 @@ flutter create --template=package packages/user_repository
 # 历史
 ## 创建dio_demo
 flutter create dio_demo --org net.aoisoft
+
+### 添加DIO依赖 当前版本5.4.0
+flutter pub add dio
