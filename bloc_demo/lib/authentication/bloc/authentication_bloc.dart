@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -21,4 +23,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
   final AuthenticationRepository _authenticationRepository;
   final UserRepository _userRepository;
+
+  FutureOr<void> _onAuthenticationStausChanged(AuthenticationStatusChanged event, Emitter<AuthenticationState> emit) {}
+
+  FutureOr<void> _onAuthenticationLogoutRequested(AuthenticationLogoutRequested event, Emitter<AuthenticationState> emit) {}
 }
