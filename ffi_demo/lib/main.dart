@@ -4,6 +4,7 @@ import 'package:go_server/api/model/request.dart';
 import 'package:go_server/core/common/start_config.dart';
 import 'package:go_server/go_server.dart';
 import 'package:go_server/api/api.dart' as api;
+import 'package:go_server/util/util.dart';
 import 'package:path_provider/path_provider.dart';
 
 late StartConfig startCfg;
@@ -11,10 +12,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   debugPrint("xxxx000");
   startCfg = StartConfig();
-  const unixSocketPath = 'goserver.sock';
-  startCfg.network = "unix";
-  debugPrint((await getTemporaryDirectory()).path);
-  startCfg.address = "${(await getTemporaryDirectory()).path}/$unixSocketPath";
+  if (!Util.supportUnixSocket()) {
+    startCfg.network = "tcp";
+    startCfg.address = "127.0.0.1:0";
+  } else {
+    const unixSocketPath = 'goserver.sock';
+    startCfg.network = "unix";
+    debugPrint((await getTemporaryDirectory()).path);
+    startCfg.address = "${(await getTemporaryDirectory()).path}/$unixSocketPath";
+  }
   debugPrint(startCfg.address);
   startCfg.apiToken = '';
 

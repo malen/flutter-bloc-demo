@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_server/api/model/create_task.dart';
-import 'package:go_server/api/model/resolve_result.dart';
 import 'package:go_server/api/model/result.dart';
 import 'package:go_server/util/util.dart';
 
@@ -48,7 +47,6 @@ class _Client {
             final socket = Socket.startConnect(InternetAddress(address, type: InternetAddressType.unix), 0);
             return socket;
           };
-          // debugPrint("client xx");
           return client;
         };
       }
