@@ -80,8 +80,8 @@ struct Start_return {
 	GoInt r0;
 	char* r1;
 };
-extern struct Start_return Start(char* cfg);
-extern void Stop();
+extern __declspec(dllexport) struct Start_return Start(char* cfg);
+extern __declspec(dllexport) void Stop();
 
 #ifdef __cplusplus
 }
