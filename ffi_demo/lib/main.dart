@@ -27,7 +27,8 @@ Future<void> main() async {
   debugPrint("xxxx111${startCfg.address}");
   final port = await GoServerBoot.instance.start(startCfg);
   debugPrint("xxxx222 $port");
-  api.init(startCfg.network, startCfg.address, startCfg.apiToken);
+  final runningAddress = '${startCfg.address.split(':').first}:$port';
+  api.init(startCfg.network, runningAddress, startCfg.apiToken);
   debugPrint("xxxx333");
   runApp(const MyApp());
 }
