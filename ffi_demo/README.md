@@ -17,12 +17,12 @@ go mod init aoisoft.net/go_server
 
 ## 编辑ffigen
 ffigen:
-  name: goServerBind
+  name: GoServerBind
   description: Bindings to go_server library.
-  output: 'lib/core/ffi/go_server_bind.dart'
+  output: 'lib/core/ffi/goserver_bind.dart'
   headers:
     entry-points:
-      - 'include/go_server.h'
+      - 'src/include/go_server.h'
 
 ## 桌面端
 ### macos 构建命令

@@ -15,20 +15,22 @@ Future<void> main() async {
   if (!Util.supportUnixSocket()) {
     startCfg.network = "tcp";
     startCfg.address = "127.0.0.1:0";
+
+    startCfg.apiToken = '';
+    final port = await GoServerBoot.instance.start(startCfg);
+    debugPrint("port: $port");
+    final runningAddress = '${startCfg.address.split(':').first}:$port';
+    api.init(startCfg.network, runningAddress, startCfg.apiToken);
   } else {
     const unixSocketPath = 'goserver.sock';
     startCfg.network = "unix";
-    debugPrint((await getTemporaryDirectory()).path);
     startCfg.address = "${(await getTemporaryDirectory()).path}/$unixSocketPath";
-  }
-  debugPrint(startCfg.address);
-  startCfg.apiToken = '';
 
-  debugPrint("xxxx111${startCfg.address}");
-  final port = await GoServerBoot.instance.start(startCfg);
-  debugPrint("xxxx222 $port");
-  final runningAddress = '${startCfg.address.split(':').first}:$port';
-  api.init(startCfg.network, runningAddress, startCfg.apiToken);
+    startCfg.apiToken = '';
+    await GoServerBoot.instance.start(startCfg);
+    api.init(startCfg.network, startCfg.address, startCfg.apiToken);
+  }
+
   debugPrint("xxxx333");
   runApp(const MyApp());
 }
