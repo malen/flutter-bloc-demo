@@ -28,7 +28,7 @@ ffigen:
 ### macos 构建命令
 go build -tags nosqlite -ldflags="-w -s" -buildmode=c-shared -o ../../macos/Frameworks/go_server.dylib ./src/bind/desktop
 ### windows 构建命令
-go build -tags nosqlite -ldflags="-w -s" -buildmode=c-shared -o ../../windows/go_server.dll ./src/bind/desktop
+CGO_ENABLED=1 CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ GOOS=windows GOARCH=amd64 go build -tags nosqlite -ldflags="-w -s" -buildmode=c-shared -o ../../windows/go_server.dll ./src/bind/desktop
 ### linux 构建命令
 go build -tags nosqlite -ldflags="-w -s" -buildmode=c-shared -o ../../linux/bundle/lib/go_server.so ./src/bind/desktop
 
